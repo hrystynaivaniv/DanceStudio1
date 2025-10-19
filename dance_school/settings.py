@@ -75,16 +75,10 @@ WSGI_APPLICATION = 'dance_school.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-DATABASES = {
-    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'danceclub',
         'USER': 'root',
-        'PASSWORD': 'Hh17022007hH',
+        'PASSWORD': 'Hh0000hH12345678',
         'HOST': 'localhost',
         'PORT': '3306'
     }
