@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e855ccf9-e28d-4047-9480-5ba694e8f6d1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dance_school_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dance_school_project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dance_school/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dance_school/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/AttendanceRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/AttendanceRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/ClassRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/ClassRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/ClientRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/ClientRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/DanceStyleRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/DanceStyleRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/EquipmentRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/EquipmentRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/HallRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/HallRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/InstructorRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/InstructorRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/PaymentRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/PaymentRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/SubscriptionRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/SubscriptionRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

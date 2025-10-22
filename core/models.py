@@ -120,14 +120,14 @@ class Attendance(models.Model):
     class_field = models.ForeignKey(
         Class,
         to_field='class_id',
-        db_column='class_id',  # точна назва колонки в таблиці
+        db_column='class_id',  
         on_delete=models.CASCADE,
         related_name='attendances'
     )
     client = models.ForeignKey(
         Client,
         to_field='client_id',
-        db_column='client_id',  # точна назва колонки в таблиці
+        db_column='client_id', 
         on_delete=models.CASCADE,
         related_name='attendances'
     )
