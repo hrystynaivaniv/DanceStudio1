@@ -29,11 +29,6 @@ class Hall(models.Model):
     hall_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     capacity = models.IntegerField()
-    equipment = models.ManyToManyField(
-        "Equipment",
-        through="HallEquipment",
-        related_name="halls"
-    )
 
     class Meta:
         managed = False
@@ -43,6 +38,7 @@ class Hall(models.Model):
         return self.name
 
 class HallEquipment(models.Model):
+    id = models.AutoField(primary_key=True)
     hall = models.ForeignKey(Hall, to_field="hall_id", on_delete=models.CASCADE)
     equipment = models.ForeignKey(Equipment, to_field="equipment_id", on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)

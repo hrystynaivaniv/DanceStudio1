@@ -15,8 +15,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework import routers
+from core.views import (
+    DanceStyleViewSet, EquipmentViewSet, HallViewSet, HallEquipmentViewSet,
+    InstructorViewSet, SubscriptionViewSet, ClientViewSet, ClassViewSet,
+    AttendanceViewSet, PaymentViewSet, SubscriptionReportView, HallEquipmentReportView
+)
+
+router = routers.DefaultRouter()
+
+router.register(r"dance-styles", DanceStyleViewSet, basename="dance-style")
+router.register(r"equipment", EquipmentViewSet, basename="equipment")
+router.register(r"halls", HallViewSet, basename="hall")
+router.register(r"hall-equipment", HallEquipmentViewSet, basename="hall-equipment")
+router.register(r"instructors", InstructorViewSet, basename="instructor")
+router.register(r"subscriptions", SubscriptionViewSet, basename="subscription")
+router.register(r"clients", ClientViewSet, basename="client")
+router.register(r"classes", ClassViewSet, basename="class")
+router.register(r"attendances", AttendanceViewSet, basename="attendance")
+router.register(r"payments", PaymentViewSet, basename="payment")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", include(router.urls)),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("reports/subscriptions/", SubscriptionReportView.as_view(), name="subscription-report"),
+    path("reports/hall-equipment/", HallEquipmentReportView.as_view(), name="hall-equipment-report"),
 ]
+

@@ -1,5 +1,6 @@
 from .ClientRepository import ClientRepository
 from .ClassRepository import ClassRepository
+from .HallEquipmentRepository import HallEquipmentRepository
 from .HallRepository import HallRepository
 from .EquipmentRepository import EquipmentRepository
 from .InstructorRepository import InstructorRepository
@@ -15,6 +16,7 @@ class RepositoryManager:
         self.classes = ClassRepository()
         self.halls = HallRepository()
         self.equipment = EquipmentRepository()
+        self.hall_equipment = HallEquipmentRepository()
         self.instructors = InstructorRepository()
         self.dance_styles = DanceStyleRepository()
         self.subscriptions = SubscriptionRepository()

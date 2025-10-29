@@ -13,7 +13,7 @@ if __name__ == "__main__":
     print("All clients:")
     all_clients = repo.clients.get_all()
     for c in all_clients:
-     print(f"{c.name} {c.surname}")
+     print(f"{c.name} {c.surname} {c.payments}")
 
     print("\nClient id=1:")
     client = repo.clients.get_by_id(1)
@@ -44,8 +44,8 @@ if __name__ == "__main__":
     print(hall)
 
     # new_hall = repo.halls.add(name="Small Hall", capacity=20)
-    # new_hall = repo.halls.add(name="Big Hall", capacity=20)
-    # hall = repo.halls.add_equipment(hall_id=9, equipment_ids=[1, 2])
+    new_hall = repo.halls.add(name="Big Hall", capacity=20)
+    hall = repo.halls.add_equipment(hall_id=9, equipment_ids=[1, 2])
 
     # updated_hall = repo.halls.update(1, capacity=50)
 
