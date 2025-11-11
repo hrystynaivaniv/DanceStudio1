@@ -22,6 +22,7 @@ from core.views import (
     InstructorViewSet, SubscriptionViewSet, ClientViewSet, ClassViewSet,
     AttendanceViewSet, PaymentViewSet, SubscriptionReportView, HallEquipmentReportView
 )
+from web import views
 
 router = routers.DefaultRouter()
 
@@ -38,9 +39,14 @@ router.register(r"payments", PaymentViewSet, basename="payment")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include(router.urls)),
+    path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("reports/subscriptions/", SubscriptionReportView.as_view(), name="subscription-report"),
     path("reports/hall-equipment/", HallEquipmentReportView.as_view(), name="hall-equipment-report"),
+    path('', views.client_list, name='client_list'),
+    path('client/<int:pk>/', views.client_detail, name='client_detail'),
+    path('client/new/', views.client_create, name='client_create'),
+    path('client/<int:pk>/edit/', views.client_edit, name='client_edit'),
+    path('client/<int:pk>/delete/', views.client_delete, name='client_delete'),
 ]
 

@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e855ccf9-e28d-4047-9480-5ba694e8f6d1" name="Changes" comment="change3">
+    <list default="true" id="e855ccf9-e28d-4047-9480-5ba694e8f6d1" name="Changes" comment="change4">
+      <change afterPath="$PROJECT_DIR$/web/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/templates/web/client_confirm_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/templates/web/client_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/templates/web/client_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/templates/web/client_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dance_school/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dance_school/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dance_school/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dance_school/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/HallRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/HallRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/RepositoryManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/RepositoryManager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -51,6 +52,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.RepositoryManager.executor": "Run",
     "Python.main.executor": "Run",
@@ -62,6 +64,14 @@
     "last_opened_file_path": "C:/Users/admin/Desktop/dance_school_project"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\Desktop\dance_school_project\web\forms\web" />
+      <recent name="C:\Users\admin\Desktop\dance_school_project\web\forms" />
+      <recent name="C:\Users\admin\Desktop\dance_school_project\web\forms\clients" />
+      <recent name="C:\Users\admin\Desktop\dance_school_project\web" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -85,12 +95,29 @@
       <option name="project" value="LOCAL" />
       <updated>1761116384720</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="change3">
+      <option name="closed" value="true" />
+      <created>1761718752893</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761718752893</updated>
+    </task>
+    <task id="LOCAL-00003" summary="change4">
+      <option name="closed" value="true" />
+      <created>1761718843127</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761718843127</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change3" />
-    <option name="LAST_COMMIT_MESSAGE" value="change3" />
+    <MESSAGE value="change4" />
+    <option name="LAST_COMMIT_MESSAGE" value="change4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

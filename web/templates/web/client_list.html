@@ -1,0 +1,14 @@
+<h1>Clients</h1>
+<a href="{% url 'client_create' %}">Add new client</a>
+<ul>
+  {% for client in clients %}
+    <li>
+      <a href="{% url 'client_detail' client.pk %}">
+        {{ client.name }} {{ client.surname }}
+      </a>
+      ({{ client.subscription.name }})
+    </li>
+  {% empty %}
+    <li>No clients found.</li>
+  {% endfor %}
+</ul>

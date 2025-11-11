@@ -1,0 +1,12 @@
+<h1>{{ client.name }} {{ client.surname }}</h1>
+<p>Phone: {{ client.phone }}</p>
+<p>Email: {{ client.email }}</p>
+<p>Subscription: {{ client.subscription.name }}</p>
+
+<a href="{% url 'client_edit' client.pk %}">Edit</a>
+<br>
+
+<a href="{% url 'client_delete' client.pk %}">Delete</a>
+<br>
+
+<a href="{% url 'client_list' %}">Back to list</a>
