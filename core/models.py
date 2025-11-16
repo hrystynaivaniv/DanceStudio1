@@ -116,25 +116,20 @@ class Attendance(models.Model):
     class_field = models.ForeignKey(
         Class,
         to_field='class_id',
-        db_column='class_id',  
+        db_column='class_id',
         on_delete=models.CASCADE,
         related_name='attendances'
     )
-    client = models.ForeignKey(
-        Client,
-        to_field='client_id',
-        db_column='client_id', 
-        on_delete=models.CASCADE,
-        related_name='attendances'
+    client = models.ForeignKey(Client,to_field='client_id',on_delete=models.CASCADE,related_name='attendances'
     )
 
     class Meta:
         managed = False
         db_table = 'attendance'
+        unique_together = ('client', 'class_field')
 
     def __str__(self):
         return f"{self.client} attended {self.class_field} on {self.date}"
-
 
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)

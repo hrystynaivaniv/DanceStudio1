@@ -29,7 +29,7 @@ class HallSerializer(serializers.ModelSerializer):
 class HallEquipmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = HallEquipment
-        fields = ("id", "hall", "equipment", "quantity")
+        fields = ("hall", "equipment", "quantity")
 
 
 class InstructorSerializer(serializers.ModelSerializer):
@@ -70,13 +70,9 @@ class ClassSerializer(serializers.ModelSerializer):
 
 
 class AttendanceSerializer(serializers.ModelSerializer):
-    class_field = serializers.PrimaryKeyRelatedField(queryset=Class.objects.all())
-    client = serializers.PrimaryKeyRelatedField(queryset=Client.objects.all())
-
     class Meta:
         model = Attendance
-        fields = ('attendance_id', 'date', 'class_field', 'client')
-        read_only_fields = ('attendance_id',)
+        fields = ('date', 'class_field', 'client')
 
 
 class PaymentSerializer(serializers.ModelSerializer):
