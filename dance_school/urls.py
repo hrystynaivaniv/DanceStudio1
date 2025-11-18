@@ -22,7 +22,7 @@ from core.views import (
     InstructorViewSet, SubscriptionViewSet, ClientViewSet, ClassViewSet,
     AttendanceViewSet, PaymentViewSet, SubscriptionReportView, HallEquipmentReportView
 )
-from web import views
+from web import views, views_lab3
 
 router = routers.DefaultRouter()
 
@@ -38,6 +38,13 @@ router.register(r"attendances", AttendanceViewSet, basename="attendance")
 router.register(r"payments", PaymentViewSet, basename="payment")
 
 urlpatterns = [
+    path('players/', views_lab3.player_list, name='player_list_name'),
+    path('players/delete/<int:player_id>/', views_lab3.player_delete,
+         name='delete_url_name'),
+    path('characters/', views_lab3.character_list, name='character_list_name'),
+    path('characters/delete/<int:character_id>/', views_lab3.character_delete,
+         name='delete_url_name'),
+
     path('admin/', admin.site.urls),
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),

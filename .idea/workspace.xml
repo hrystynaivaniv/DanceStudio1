@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e855ccf9-e28d-4047-9480-5ba694e8f6d1" name="Changes" comment="shablony">
+    <list default="true" id="e855ccf9-e28d-4047-9480-5ba694e8f6d1" name="Changes" comment="updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/AttendanceRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/AttendanceRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dance_school/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dance_school/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -61,12 +58,15 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/admin/Desktop/dance_school_project&quot;
   }
 }</component>
+  <component name="Push.Settings">
+    <option name="SHOW_DETAILS_PANEL" value="false" />
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\Desktop\dance_school_project\web" />
       <recent name="C:\Users\admin\Desktop\dance_school_project\web\forms\web" />
       <recent name="C:\Users\admin\Desktop\dance_school_project\web\forms" />
       <recent name="C:\Users\admin\Desktop\dance_school_project\web\forms\clients" />
-      <recent name="C:\Users\admin\Desktop\dance_school_project\web" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -116,14 +116,31 @@
       <option name="project" value="LOCAL" />
       <updated>1762844397586</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updated">
+      <option name="closed" value="true" />
+      <created>1763303100587</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763303100588</updated>
+    </task>
+    <task id="LOCAL-00006" summary="updated">
+      <option name="closed" value="true" />
+      <created>1763303124275</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763303124275</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change3" />
     <MESSAGE value="change4" />
     <MESSAGE value="shablony" />
-    <option name="LAST_COMMIT_MESSAGE" value="shablony" />
+    <MESSAGE value="updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

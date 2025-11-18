@@ -1,0 +1,19 @@
+<h2>Characters</h2>
+
+{% if characters %}
+    {% for character in characters %}
+            {{ character.character_id }}
+            {{ character.name }}
+            {{ character.role }}
+                <form method="POST" action="{% url 'delete_url_name' character_id=character.character_id %}">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete character {{ character.name }}?');">
+                        Delete
+                    </button>
+                </form>
+    {% endfor %}
+{% else %}
+    {% if not characters %}
+        <p>The list is empty </p>
+    {% endif %}
+{% endif %}
