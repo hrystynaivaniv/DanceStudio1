@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dance Club Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<h1>Dance Club Dashboard</h1>
+
+<h2>1. Clients per Subscription</h2>
+
+<div id="subs-filters">
+    <label for="subscription_select">Select Subscription:</label>
+    <select id="subscription_select" name="subscription_select">
+        <option value="">All Subscriptions</option>
+        {% for sub in all_subscriptions %}
+            <option value="{{ sub.subscription_id }}">{{ sub.name }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div id="subs_graph_container">
+    {{ subs_graph|safe }}
+</div>
+
+<h2>2. Equipment per Hall</h2>
+
+<div id="equipment-filters">
+    <label for="equipment_select">Select Equipment:</label>
+    <select id="equipment_select" name="equipment_select">
+        <option value="">All Equipment</option>
+        {% for eq in all_equipment %}
+            <option value="{{ eq.equipment_id }}">{{ eq.name }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div id="hall_eq_graph_container">
+    {{ hall_eq_graph|safe }}
+</div>
+
+<h2>3. Revenue by Payment Method</h2>
+<div id="revenue_graph_container">
+    {{ revenue_graph|safe }}
+</div>
+
+<h2>4. Top Instructors</h2>
+
+<div id="instructor-filters">
+    <label for="instructor_limit">Top Instructors (1–10):</label>
+    <input type="range" id="instructor_limit" min="1" max="10" value="5">
+    <span id="limit_value">5</span>
+</div>
+
+<div id="top_inst_graph_container">
+    {{ top_inst_graph|safe }}
+</div>
+
+<h2>5. Monthly Revenue</h2>
+
+<div id="monthly-revenue-filters">
+    <label for="min_date">Start Date:</label>
+    <input type="date" id="min_date">
+    <label for="max_date">End Date:</label>
+    <input type="date" id="max_date">
+    <button id="apply_filter">Apply Filter</button>
+</div>
+
+<div id="monthly_graph_container">
+    {{ monthly_graph|safe }}
+</div>
+
+<h2>6. Average Attendees per Class</h2>
+
+<div id="class-efficiency-filters">
+    <label for="dance_style_select">Filter by Dance Style:</label>
+    <select id="dance_style_select">
+        <option value="">All Dance Styles</option>
+        {% for style in all_dance_styles %}
+            <option value="{{ style.dance_style_id }}">{{ style.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="hall_limit">Top Halls Limit (1–10):</label>
+    <input type="range" id="hall_limit" min="1" max="10" value="5">
+    <span id="hall_limit_value">5</span>
+</div>
+
+<div id="hall_eff_graph_container">
+    {{ hall_eff_graph|safe }}
+</div>
+
+<script>
+$(document).ready(function() {
+    var dashboardUrl = "{% url 'dashboard' %}";
+
+    $('#subscription_select').change(function() {
+        var selectedSubId = $(this).val();
+        $('#subs_graph_container').html('<h2>Loading...</h2>');
+
+        $.ajax({
+            url: dashboardUrl,
+            type: 'GET',
+            data: {
+                subscription_id: selectedSubId,
+                filter_type: 'subs'
+            },
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            },
+            success: function(response) {
+                $('#subs_graph_container').html(response.subs_graph || '<h2>No data found.</h2>');
+            },
+            error: function() {
+                $('#subs_graph_container').html('<h2>Error loading data.</h2>');
+            }
+        });
+    });
+
+    $('#instructor_limit').on('input change', function() {
+        var limit = $(this).val();
+        $('#limit_value').text(limit);
+        $('#top_inst_graph_container').html('<h2>Loading...</h2>');
+
+        $.ajax({
+            url: dashboardUrl,
+            type: 'GET',
+            data: {
+                instructor_limit: limit,
+                filter_type: 'instructors'
+            },
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            },
+            success: function(response) {
+                $('#top_inst_graph_container').html(response.top_inst_graph || '<h2>No data found.</h2>');
+            },
+            error: function() {
+                $('#top_inst_graph_container').html('<h2>Error loading data.</h2>');
+            }
+        });
+    });
+
+    $('#apply_filter').click(function() {
+        var minDate = $('#min_date').val();
+        var maxDate = $('#max_date').val();
+
+        $('#monthly_graph_container').html('<h2>Loading...</h2>');
+
+        $.ajax({
+            url: dashboardUrl,
+            type: 'GET',
+            data: {
+                min_date: minDate,
+                max_date: maxDate,
+                filter_type: 'monthly_revenue'
+            },
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            },
+            success: function(response) {
+                $('#monthly_graph_container').html(response.monthly_graph || '<h2>No data found.</h2>');
+            },
+            error: function() {
+                $('#monthly_graph_container').html('<h2>Error loading data.</h2>');
+            }
+        });
+    });
+
+    $('#equipment_select').change(function() {
+        var selectedEqId = $(this).val();
+        $('#hall_eq_graph_container').html('<h2>Loading...</h2>');
+
+        $.ajax({
+            url: dashboardUrl,
+            type: 'GET',
+            data: {
+                equipment_id: selectedEqId,
+                filter_type: 'equipment'
+            },
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            },
+            success: function(response) {
+                $('#hall_eq_graph_container').html(response.hall_eq_graph || '<h2>No data found.</h2>');
+            },
+            error: function() {
+                $('#hall_eq_graph_container').html('<h2>Error loading data.</h2>');
+            }
+        });
+    });
+
+    $('#dance_style_select').change(function() {
+        var selectedStyleId = $(this).val();
+        var hallLimit = $('#hall_limit').val();
+
+        $('#hall_eff_graph_container').html('<h2>Loading...</h2>');
+
+        $.ajax({
+            url: dashboardUrl,
+            type: 'GET',
+            data: {
+                dance_style_id: selectedStyleId,
+                hall_limit: hallLimit,
+                filter_type: 'dance_style_efficiency'
+            },
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            },
+            success: function(response) {
+                $('#hall_eff_graph_container').html(response.hall_eff_graph || '<h2>No data found.</h2>');
+            },
+            error: function() {
+                $('#hall_eff_graph_container').html('<h2>Error loading data.</h2>');
+            }
+        });
+    });
+
+    $('#hall_limit').on('input change', function() {
+        var limit = $(this).val();
+        $('#hall_limit_value').text(limit);
+        var styleId = $('#dance_style_select').val();
+
+        $('#hall_eff_graph_container').html('<h2>Loading...</h2>');
+
+        $.ajax({
+            url: dashboardUrl,
+            type: 'GET',
+            data: {
+                hall_limit: limit,
+                dance_style_id: styleId,
+                filter_type: 'hall_efficiency_limit'
+            },
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            },
+            success: function(response) {
+                $('#hall_eff_graph_container').html(response.hall_eff_graph || '<h2>No data found.</h2>');
+            },
+            error: function() {
+                $('#hall_eff_graph_container').html('<h2>Error loading data.</h2>');
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

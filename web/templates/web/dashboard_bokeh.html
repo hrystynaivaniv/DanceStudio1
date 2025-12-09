@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics Dashboard</title>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.8.1.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.8.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .chart-box {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+        .filter-group label {
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+        .filter-group select,
+        .filter-group input {
+            padding: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .chart-title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align: center;">Analytics Dashboard</h1>
+
+<form method="get" id="main-dashboard-form"></form>
+
+<div class="grid-container">
+
+    <div class="chart-box">
+        <div class="filter-header">
+            <span class="chart-title">1. Clients per Subscription</span>
+        </div>
+        {{ divs.chart_subs | safe }}
+    </div>
+
+    <div class="chart-box">
+        <div class="filter-header">
+            <span class="chart-title">2. Equipment per Hall</span>
+        </div>
+        {{ divs.chart_hall_eq | safe }}
+    </div>
+
+    <div class="chart-box">
+        <div class="filter-header">
+            <span class="chart-title">3. Revenue by Payment Method</span>
+        </div>
+        {{ divs.chart_revenue | safe }}
+    </div>
+
+    <div class="chart-box">
+        <div class="filter-header">
+            <span class="chart-title">4. Top Instructors</span>
+            <div class="filter-group">
+                <label for="instructor_limit">Limit:</label>
+                <select name="instructor_limit" id="instructor_limit"
+                        form="main-dashboard-form"
+                        onchange="this.form.submit()">
+                    {% for limit in limit_options %}
+                        <option value="{{ limit }}" {% if current_instructor_limit|stringformat:"i" == limit|stringformat:"i" %}selected{% endif %}>
+                            Top {{ limit }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        {{ divs.chart_inst | safe }}
+    </div>
+
+    <div class="chart-box">
+        <div class="filter-header">
+            <span class="chart-title">5. Monthly Revenue</span>
+            <div class="filter-group">
+                <label for="min_date">Start Date:</label>
+                <input type="date" name="min_date" id="min_date"
+                       value="{{ current_min_date|default:'' }}"
+                       form="main-dashboard-form"
+                       onchange="this.form.submit()">
+
+                <label for="max_date" style="margin-left: 15px;">End Date:</label>
+                <input type="date" name="max_date" id="max_date"
+                       value="{{ current_max_date|default:'' }}"
+                       form="main-dashboard-form"
+                       onchange="this.form.submit()">
+            </div>
+        </div>
+        {{ divs.chart_monthly | safe }}
+    </div>
+
+    <div class="chart-box">
+        <div class="filter-header">
+            <span class="chart-title">6. Avg Attendees per Class</span>
+            <div class="filter-group">
+                <label for="hall_limit">Halls Limit:</label>
+                <input type="number" name="hall_limit" id="hall_limit"
+                       value="{{ current_hall_limit }}" min="1" max="20"
+                       style="width: 60px;" form="main-dashboard-form"
+                       onchange="this.form.submit()">
+            </div>
+        </div>
+        {{ divs.chart_hall_eff | safe }}
+    </div>
+
+</div>
+
+{{ script | safe }}
+
+<a href="?" style="position: fixed; top: 20px; right: 20px; text-decoration: none; color: red; font-weight: bold;">Reset Filters</a>
+
+</body>
+</html>

@@ -20,9 +20,12 @@ from rest_framework import routers
 from core.views import (
     DanceStyleViewSet, EquipmentViewSet, HallViewSet, HallEquipmentViewSet,
     InstructorViewSet, SubscriptionViewSet, ClientViewSet, ClassViewSet,
-    AttendanceViewSet, PaymentViewSet, SubscriptionReportView, HallEquipmentReportView
+    AttendanceViewSet, PaymentViewSet, SubscriptionReportView, HallEquipmentReportView, PaymentMethodRevenueReportView,
+    TopInstructorsByClassesReportView, MonthlyRevenueReportView, HallEfficiencyReportView
 )
 from web import views, views_lab3
+from web.views import dashboard, parallel_dashboard
+from web.v2 import BokehDashboardView
 
 router = routers.DefaultRouter()
 
@@ -37,6 +40,7 @@ router.register(r"classes", ClassViewSet, basename="class")
 router.register(r"attendances", AttendanceViewSet, basename="attendance")
 router.register(r"payments", PaymentViewSet, basename="payment")
 
+
 urlpatterns = [
     path('players/', views_lab3.player_list, name='player_list_name'),
     path('players/delete/<int:player_id>/', views_lab3.player_delete,
@@ -48,8 +52,17 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("reports/subscriptions/", SubscriptionReportView.as_view(), name="subscription-report"),
-    path("reports/hall-equipment/", HallEquipmentReportView.as_view(), name="hall-equipment-report"),
+
+    path("subscriptions/", SubscriptionReportView.as_view(), name="subscription-report"),
+    path("hall-equipment/", HallEquipmentReportView.as_view(), name="hall-equipment-report"),
+    path("payment-method-revenue/", PaymentMethodRevenueReportView.as_view(), name="payment-method-revenue-report"),
+    path("monthly-revenue/", MonthlyRevenueReportView.as_view(), name="monthly-revenue-report"),
+    path("hall-efficiency/", HallEfficiencyReportView.as_view(), name="hall-efficiency-report"),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
+
+    path('dashboard_bokeh/', BokehDashboardView.as_view(), name='dashboard_bokeh'),
+    path("parallel/", parallel_dashboard, name="parallel_dashboard"),
     path('', views.client_list, name='client_list'),
     path('client/<int:pk>/', views.client_detail, name='client_detail'),
     path('client/new/', views.client_create, name='client_create'),

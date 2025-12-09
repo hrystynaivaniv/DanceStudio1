@@ -16,6 +16,13 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 
+from django.db.models import Sum, Count, F, Max, Min, Avg
+from django.db.models.functions import TruncMonth, TruncDate
+from datetime import timedelta
+from django.utils import timezone
+
+import pandas as pd
+
 repo = RepositoryManager()
 
 class DanceStyleViewSet(viewsets.ModelViewSet):
@@ -201,16 +208,129 @@ class PaymentViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
+
 class SubscriptionReportView(APIView):
     def get(self, request):
-        data = Subscription.objects.annotate(
-            client_count=Count('clients')
-        ).values('subscription_id', 'name', 'client_count')
-        return Response(list(data))
+        repo = RepositoryManager()
+        queryset = repo.subscriptions.get_subscriptions_with_client_count()
 
-from django.db.models import Sum
+        df = pd.DataFrame(list(queryset))
+
+        stats = {}
+        if not df.empty:
+            revenue_attribute = df['client_count']
+            stats = {
+                'Medium': revenue_attribute.mean(),
+                'Median': revenue_attribute.median(),
+                'Min': revenue_attribute.min(),
+                'Max': revenue_attribute.max(),
+            }
+
+        return Response({"data": df.to_dict('records'), "stats": stats})
+
+
 
 class HallEquipmentReportView(APIView):
     def get(self, request):
-        data = HallEquipment.objects.values('hall__name').annotate(total_quantity=Sum('quantity'))
-        return Response(list(data))
+        repo = RepositoryManager()
+        queryset = repo.hall_equipment.get_total_equipment_by_hall()
+
+        df = pd.DataFrame(list(queryset))
+
+        stats = {}
+        if not df.empty:
+            qty = df['total_quantity']
+            stats = {
+                'Medium': qty.mean(),
+                'Median': qty.median(),
+                'Min': qty.min(),
+                'Max': qty.max(),
+            }
+
+        return Response({"data": df.to_dict('records'), "stats": stats})
+
+
+
+class PaymentMethodRevenueReportView(APIView):
+    def get(self, request):
+        repo = RepositoryManager()
+        queryset = repo.payments.get_revenue_by_method()
+
+        df = pd.DataFrame(list(queryset))
+
+        stats = {}
+        if not df.empty:
+            revenue = df['total_revenue']
+            stats = {
+                'Medium': revenue.mean(),
+                'Median': revenue.median(),
+                'Min': revenue.min(),
+                'Max': revenue.max(),
+            }
+
+        return Response({"data": df.to_dict('records'), "stats": stats})
+
+
+class TopInstructorsByClassesReportView(APIView):
+    def get(self, request):
+        repo = RepositoryManager()
+        queryset = repo.instructors.get_top_instructors()
+
+        df = pd.DataFrame(list(queryset))
+
+        stats = {}
+        if not df.empty:
+            cnt = df['class_count']
+            stats = {
+                'Medium': cnt.mean(),
+                'Median': cnt.median(),
+                'Min': cnt.min(),
+                'Max': cnt.max(),
+            }
+
+        return Response({"data": df.to_dict('records'), "stats": stats})
+
+
+
+class MonthlyRevenueReportView(APIView):
+    def get(self, request):
+        repo = RepositoryManager()
+        queryset = repo.payments.get_monthly_revenue()
+
+        df = pd.DataFrame(list(queryset))
+
+        stats = {}
+        if not df.empty:
+            revenue = df['total_revenue']
+            stats = {
+                'Medium': revenue.mean(),
+                'Median': revenue.median(),
+                'Min': revenue.min(),
+                'Max': revenue.max(),
+            }
+
+            df['month_year'] = df['month_year'].dt.strftime('%Y-%m')
+
+        return Response({"data": df.to_dict('records'), "stats": stats})
+
+
+class HallEfficiencyReportView(APIView):
+    def get(self, request):
+        repo = RepositoryManager()
+        queryset = repo.halls.get_hall_efficiency()
+
+        df = pd.DataFrame(list(queryset))
+
+        stats = {}
+        if not df.empty:
+            eff = df['avg_attendees_per_class']
+            stats = {
+                'Medium': eff.mean(),
+                'Median': eff.median(),
+                'Min': eff.min(),
+                'Max': eff.max(),
+            }
+
+            df['avg_attendees_per_class'] = df['avg_attendees_per_class'].round(2)
+
+        return Response({"data": df.to_dict('records'), "stats": stats})
